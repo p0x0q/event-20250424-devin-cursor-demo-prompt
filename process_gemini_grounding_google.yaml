@@ -1,0 +1,27 @@
+openapi: 3.1.0
+info:
+  title: Google Grounding Search API
+  description: Performs a Google search and retrieves results with grounding information.
+  version: v1.0.0
+servers:
+  - url: https://xxx.xxx.com/
+paths:
+  /xxx/process_gemini_grounding_google:
+    post:
+      summary: Perform Google Search with Grounding
+      description: Executes a Google search based on a provided prompt and returns results with grounding information.
+      operationId: processGeminiGroundingGoogle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: The search query or prompt for retrieving grounded results.
+                  example: "Retrieve financial and corporate information about DMM.com"
+      responses:
+        '200':
+          description: The search results with grounding information.

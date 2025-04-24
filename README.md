@@ -60,4 +60,11 @@ https://stg-dify.p0x0q.com/app/a7d3123e-2134-443d-864c-9b19dce6d71e/workflow
 
 # その他、実際にWEB検索を行う、Pythonアプリやカスタムツールの設定などは本日中に公開予定です！
 
-本リポジトリをStarしてお待ちください！
+カスタムツールとして公開済み。
+
+process_gemini_grounding_google.py
+
+process_gemini_grounding_google_test.sh
+
+process_gemini_grounding_google.yaml
+

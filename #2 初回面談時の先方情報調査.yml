@@ -1,0 +1,459 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: '#2 初回面談時の先方情報調査'
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 100
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: llm
+      id: 1741251000662-source-17412510344460-target
+      selected: false
+      source: '1741251000662'
+      sourceHandle: source
+      target: '17412510344460'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: template-transform
+      id: 1741250128157-source-1741251439752-target
+      selected: false
+      source: '1741250128157'
+      sourceHandle: source
+      target: '1741251439752'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: template-transform
+        targetType: tool
+      id: 1741251439752-source-1741251000662-target
+      selected: false
+      source: '1741251439752'
+      sourceHandle: source
+      target: '1741251000662'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: parameter-extractor
+      id: 17412510344460-source-1741251614358-target
+      selected: false
+      source: '17412510344460'
+      sourceHandle: source
+      target: '1741251614358'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: parameter-extractor
+        targetType: iteration
+      id: 1741251614358-source-1741251746299-target
+      selected: false
+      source: '1741251614358'
+      sourceHandle: source
+      target: '1741251746299'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1741251746299'
+        sourceType: iteration-start
+        targetType: http-request
+      id: 1741251746299start-source-1741251762594-target
+      selected: false
+      source: 1741251746299start
+      sourceHandle: source
+      target: '1741251762594'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        sourceType: iteration
+        targetType: end
+      id: 1741251746299-source-1741250181002-target
+      selected: false
+      source: '1741251746299'
+      sourceHandle: source
+      target: '1741250181002'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 開始
+        type: start
+        variables:
+        - label: 'personal_name: 調べて欲しい個人名'
+          max_length: 48
+          options: []
+          required: true
+          type: paragraph
+          variable: personal_name
+        - label: 'prompt: 調べた上で何をやって欲しいか'
+          max_length: 25000
+          options: []
+          required: true
+          type: paragraph
+          variable: prompt
+      height: 116
+      id: '1741250128157'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '17412510344460'
+          - text
+          variable: text
+        - value_selector:
+          - '1741251614358'
+          - link
+          variable: link
+        - value_selector:
+          - '1741251746299'
+          - output
+          variable: scrapeBody
+        selected: false
+        title: 終了
+        type: end
+      height: 142
+      id: '1741250181002'
+      position:
+        x: 1038.9722092121315
+        y: 434.1809894515558
+      positionAbsolute:
+        x: 1038.9722092121315
+        y: 434.1809894515558
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: 1e65b50f-34f7-44f8-bdfe-98a6269ed0e3
+        provider_name: Google Grounding Search API
+        provider_type: api
+        selected: false
+        title: Gemini Google 検索
+        tool_configurations: {}
+        tool_label: processGeminiGroundingGoogle
+        tool_name: processGeminiGroundingGoogle
+        tool_parameters:
+          prompt:
+            type: mixed
+            value: '{{#1741251439752.output#}}'
+        type: tool
+      height: 54
+      id: '1741251000662'
+      position:
+        x: 384
+        y: 386.2040053841544
+      positionAbsolute:
+        x: 384
+        y: 386.2040053841544
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: o3-mini
+          provider: openai
+        prompt_template:
+        - id: 38a647e5-d971-4bab-817f-bfcccba0fa87
+          role: system
+          text: '# ユーザーの依頼
+
+
+            {{#1741250128157.personal_name#}}さんについて調べた上で「{{#1741250128157.prompt#}}」をしたい。
+
+
+            '
+        - id: 3de6da76-2a25-4e5b-8b28-98c37e997d17
+          role: user
+          text: '
+
+            # Google検索結果
+
+
+            {{#1741251000662.text#}}
+
+
+
+            '
+        selected: false
+        title: 最終出力
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '17412510344460'
+      position:
+        x: 697.4479412914363
+        y: 282
+      positionAbsolute:
+        x: 697.4479412914363
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        selected: true
+        template: '{{ peronal_name }}さんについてできるだけ多くGoogle調べた上で「{{ prompt }}」をするための検索方法を考案して。'
+        title: prompt
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1741250128157'
+          - personal_name
+          variable: peronal_name
+        - value_selector:
+          - '1741250128157'
+          - prompt
+          variable: prompt
+      height: 54
+      id: '1741251439752'
+      position:
+        x: 384
+        y: 282
+      positionAbsolute:
+        x: 384
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: o3-mini
+          provider: openai
+        parameters:
+        - description: 引用リンク集
+          name: link
+          required: true
+          type: array[string]
+        query:
+        - '17412510344460'
+        - text
+        reasoning_mode: prompt
+        selected: false
+        title: パラメーター抽出
+        type: parameter-extractor
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1741251614358'
+      position:
+        x: 691.7282864254173
+        y: 405.0998879670269
+      positionAbsolute:
+        x: 691.7282864254173
+        y: 405.0998879670269
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: continue-on-error
+        height: 261
+        is_parallel: false
+        iterator_selector:
+        - '1741251614358'
+        - link
+        output_selector:
+        - '1741251762594'
+        - body
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1741251746299start
+        title: イテレーション
+        type: iteration
+        width: 491
+      height: 261
+      id: '1741251746299'
+      position:
+        x: 455.8564512158606
+        y: 560.2006193583659
+      positionAbsolute:
+        x: 455.8564512158606
+        y: 560.2006193583659
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 491
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1741251746299start
+      parentId: '1741251746299'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 479.8564512158606
+        y: 628.2006193583659
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        default_value:
+        - key: body
+          type: string
+          value: エラーが発生しました。
+        - key: status_code
+          type: number
+          value: 0
+        - key: headers
+          type: object
+          value: '{}'
+        desc: ''
+        error_strategy: default-value
+        headers: ''
+        isInIteration: true
+        iteration_id: '1741251746299'
+        method: get
+        params: ''
+        retry_config:
+          max_retries: '1'
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTPリクエスト
+        type: http-request
+        url: '{{#1741251746299.item#}}'
+        variables: []
+      height: 158
+      id: '1741251762594'
+      parentId: '1741251746299'
+      position:
+        x: 134.18168439718386
+        y: 65
+      positionAbsolute:
+        x: 590.0381356130445
+        y: 625.2006193583659
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    viewport:
+      x: 25.766430236379506
+      y: -47.88889111304036
+      zoom: 0.6470728272414281

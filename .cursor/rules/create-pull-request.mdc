@@ -1,0 +1,54 @@
+---
+description: プルリクエストの作成に関するルール
+globs: 
+alwaysApply: true
+---
+# Pull Requestの作成順序
+- 必ず上から順番に確認、実行していくこと
+- 順序を絶対に飛ばしたりしないこと
+
+## featureブランチの確認
+- 下記のコマンドで現在チェックアウトしch --show-current
+```
+- ブランチ名に`feature/`がついている場合は、既にfeatureブランチが作成済みなので特に何もしない
+- ブランチ名に`feature/`がついていない場合は、以下のコマンドでfeatureブランチを作成する
+```
+git checkout -b feature/$(date '+%Y%m%d%H%M%S') origin/main
+```
+
+## コミット状態の確認
+- 以下のコマンドを実行して、ステージされている変更がなく、すべてコミットされた状態かどうか確認する
+```
+git status
+```
+- もし変更が残っていれば以下のコマンドを実行する
+```
+git add .　&& \
+git diff --cached | cat && \
+git commit -m "{{diffで読み取った内容を要約}}"
+```
+
+## Issueリンクの作成
+- ユーザーからIssue番号が提供された場合は、そのままIssueリンクとする
+- Issue番号が提供されなかった場合は、特に何もせず、次の工程に移る
+
+## コード差分の確認
+- 下記のコマンドでコード差分を確認し、記憶に留めておくこと
+```
+git diff origin/main HEAD | cat
+```
+
+## プルリクエストの作成
+- PRタイトルはコード差分から適切な内容で書くこと
+- [PULL_REQUEST_TEMPLATE.md](mdc:.github/PULL_REQUEST_TEMPLATE.md)をベースに以下の条件で本文を作成する 
+  - Issueの部分は作成した{{Issueリンク}}で置き換えること。Issue番号が無い場合は「Issue無し」と書く
+  - 概要の部分はコード差分から適切な内容で箇条書きで書く
+  - 必要な情報を漏れなく記載する
+- 作成した本文は改行を`\n`に置き換えて1行に変換しておく
+- 最終的に下記コマンドを実行してPRを作成し、Webで開く
+```
+git push origin HEAD && \
+echo -e "{{1行に変換した本文}}" | \
+gh pr create --title "{{PRタイトル}}" --body-file - && \
+gh pr view --web $(git branch --show-current)
+```

@@ -1,0 +1,19 @@
+---
+description: featureブランチ作成に関するルール
+globs: 
+alwaysApply: true
+---
+# ブランチの作成順序
+- 必ず上から順番に確認、実行していくこと
+- 順序を絶対に飛ばしたりしないこと
+
+## Featureブランチの確認
+- 下記のコマンドで現在チェックアウトしているブランチ名を取得する
+```
+git branch --show-current
+```
+- ブランチ名に`feature/`がついている場合は、既にfeatureブランチが作成済みなので特に何もしない
+- ブランチ名に`feature/`がついていない場合は、以下のコマンドでfeatureブランチを作成する
+```
+git checkout -b feature/$(date '+%Y%m%d%H%M%S') origin/main
+```

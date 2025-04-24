@@ -1,0 +1,626 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: '#3 DeepResearch 企業情報調査'
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 100
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: llm
+      id: 1731653639411-source-1743745233178-target
+      source: '1731653639411'
+      sourceHandle: source
+      target: '1743745233178'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: parameter-extractor
+      id: 1743745233178-source-1743745464751-target
+      source: '1743745233178'
+      sourceHandle: source
+      target: '1743745464751'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: parameter-extractor
+        targetType: iteration
+      id: 1743745464751-source-1743745505461-target
+      source: '1743745464751'
+      sourceHandle: source
+      target: '1743745505461'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1743745505461'
+        sourceType: iteration-start
+        targetType: template-transform
+      id: 1743745505461start-source-1743745524588-target
+      source: 1743745505461start
+      sourceHandle: source
+      target: '1743745524588'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: llm
+      id: 1743745653882-source-17437605360250-target
+      source: '1743745653882'
+      sourceHandle: source
+      target: '17437605360250'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: iteration
+        targetType: template-transform
+      id: 1743745505461-source-1743760557868-target
+      source: '1743745505461'
+      sourceHandle: source
+      target: '1743760557868'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: template-transform
+        targetType: llm
+      id: 1743760557868-source-1743745653882-target
+      source: '1743760557868'
+      sourceHandle: source
+      target: '1743745653882'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 17437605360250-source-1732882499311-target
+      source: '17437605360250'
+      sourceHandle: source
+      target: '1732882499311'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1743745505461'
+        sourceType: template-transform
+        targetType: tool
+      id: 1743745524588-source-1745489794761-target
+      source: '1743745524588'
+      sourceHandle: source
+      target: '1745489794761'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 開始
+        type: start
+        variables:
+        - label: 'company_name: 企業名'
+          max_length: 255
+          options: []
+          required: true
+          type: text-input
+          variable: company_name
+      height: 90
+      id: '1731653639411'
+      position:
+        x: 627.0909053513357
+        y: 923.6530457276799
+      positionAbsolute:
+        x: 627.0909053513357
+        y: 923.6530457276799
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        author: chappy-hacking-dify
+        desc: ''
+        height: 122
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"https://chappy-hacking-dify.onecareer.jp/app/f78caa84-5bf0-4258-975e-27efe9b57af5/configuration","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 402
+      height: 122
+      id: '1732162993384'
+      position:
+        x: 390.02792083723
+        y: 295.29631944538943
+      positionAbsolute:
+        x: 390.02792083723
+        y: 295.29631944538943
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 402
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '17437605360250'
+          - text
+          variable: text
+        selected: false
+        title: 終了 2
+        type: end
+      height: 90
+      id: '1732882499311'
+      position:
+        x: 2805.2713878285526
+        y: 1524.8914901189669
+      positionAbsolute:
+        x: 2805.2713878285526
+        y: 1524.8914901189669
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1731653639411'
+          - company_name
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: openai
+        prompt_template:
+        - id: 05f2a400-d40b-4f57-905a-3bc6537c85e4
+          role: system
+          text: "以下の企業について、信頼できる最新情報を収集し、要点をJSON形式で整理してください。各項目について調査が必要な内容を言語化し、検索クエリも含めて明示してください。\n\
+            \n### 調査対象企業: {{#context#}}\n\n## 企業情報\n\n1. **所在地:** \n   - 調べる内容: [企業名]の本社所在地\n\
+            \   - 検索クエリ: \"[企業名] 本社所在地\"\n\n2. **業種:**\n   - 調べる内容: [企業名]の主要な業界分類\n\
+            \   - 検索クエリ: \"[企業名] 業種\"\n\n3. **従業員数:**\n   - 調べる内容: [企業名]の最新の従業員数情報（内訳も含む）\n\
+            \   - 検索クエリ: \"[企業名] 従業員数 2023\"\n\n4. **業務内容:**\n   - 調べる内容: [企業名]の主な製品・サービス、事業内容\n\
+            \   - 検索クエリ: \"[企業名] 業務内容\"\n\n5. **ビジネスモデル:**\n   - 調べる内容: [企業名]の収益の仕組み、分類\n\
+            \   - 検索クエリ: \"[企業名] ビジネスモデル\"\n\n6. **親会社:**\n   - 調べる内容: [企業名]の親会社の有無とその企業名\n\
+            \   - 検索クエリ: \"[企業名] 親会社\"\n\n7. **事業上の競合:**\n   - 調べる内容: [企業名]の主要な競合企業\n\
+            \   - 検索クエリ: \"[企業名] 競合企業\"\n\n8. **競合と比較した際の強み・弱み:**\n   - 調べる内容: [企業名]の競争優位性と課題点\n\
+            \   - 検索クエリ: \"[企業名] 競争優位性 弱み\"\n\n## 採用情報\n\n1. **採用人数:**\n   - 調べる内容:\
+            \ [企業名]の新卒採用人数\n   - 検索クエリ: \"[企業名] 新卒 採用人数\"\n\n2. **募集職種:**\n   - 調べる内容:\
+            \ [企業名]の新卒採用における募集中の職種\n   - 検索クエリ: \"[企業名] 新卒 募集職種\"\n\n3. **求める人物像:**\n\
+            \   - 調べる内容: [企業名]が求める新卒の人物像\n   - 検索クエリ: \"[企業名] 新卒 求める人物像\"\n\n4. **選考プロセス:**\n\
+            \   - 調べる内容: [企業名]の新卒採用の選考プロセス\n   - 検索クエリ: \"[企業名] 新卒 選考プロセス\"\n\n5.\
+            \ **社員インタビュー記事:**\n   - 調べる内容: [企業名]の社員インタビュー情報\n   - 検索クエリ: \"[企業名] 社員インタビュー\"\
+            \n\n6. **エントリーする学生のペルソナ:**\n   - 調べる内容: [企業名]にエントリーする学生の特徴\n   - 検索クエリ:\
+            \ \"[企業名] エントリー 学生 特徴\"\n\n制約条件:\n- 情報ソースとして、公式ウェブサイト、IR資料、求人サイト、ニュース記事、SNS（企業の公式アカウント）などを利用してください。\n\
+            - 最新の情報を優先して取得してください。\n\nOutput Format\n- JSON形式で企業情報と採用情報を整理してください。"
+        selected: false
+        title: generate Search Tasks
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1743745233178'
+      position:
+        x: 816.0924257885033
+        y: 1140.3028076494197
+      positionAbsolute:
+        x: 816.0924257885033
+        y: 1140.3028076494197
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: openai
+        parameters:
+        - description: 何について調査しなければならないのか、項目名と概要について列挙する
+          name: searchTasks
+          required: true
+          type: array[string]
+        query:
+        - '1743745233178'
+        - text
+        reasoning_mode: prompt
+        selected: false
+        title: Extract Params
+        type: parameter-extractor
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1743745464751'
+      position:
+        x: 1120.0924257885033
+        y: 1140.3028076494197
+      positionAbsolute:
+        x: 1120.0924257885033
+        y: 1140.3028076494197
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: remove-abnormal-output
+        height: 235
+        is_parallel: true
+        iterator_selector:
+        - '1743745464751'
+        - searchTasks
+        output_selector:
+        - '1745489794761'
+        - text
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1743745505461start
+        title: Searching Tasks
+        type: iteration
+        width: 692
+      height: 235
+      id: '1743745505461'
+      position:
+        x: 1425.626962825754
+        y: 1140.3028076494197
+      positionAbsolute:
+        x: 1425.626962825754
+        y: 1140.3028076494197
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 692
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1743745505461start
+      parentId: '1743745505461'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 1449.626962825754
+        y: 1208.3028076494197
+      selectable: false
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1743745505461'
+        selected: false
+        template: '{{ company_name }}の{{ item }} について調べたい。'
+        title: generate search keyword
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1743745505461'
+          - item
+          variable: item
+        - value_selector:
+          - '1731653639411'
+          - company_name
+          variable: company_name
+      height: 54
+      id: '1743745524588'
+      parentId: '1743745505461'
+      position:
+        x: 128
+        y: 68
+      positionAbsolute:
+        x: 1553.626962825754
+        y: 1208.3028076494197
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: o3-mini
+          provider: openai
+        prompt_template:
+        - id: d4952c9b-5f87-41ae-a4fb-7d7b3ec525d9
+          role: system
+          text: '{{#1743760557868.output#}}'
+        - id: 33e5de95-4dae-4c82-b0f4-448c4c39204a
+          role: user
+          text: '# 企業や採用に関する情報
+
+
+            {{#1743745505461.output#}}'
+        selected: false
+        title: First Output
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1743745653882'
+      position:
+        x: 2594.7712517900923
+        y: 1154.4785509633502
+      positionAbsolute:
+        x: 2594.7712517900923
+        y: 1154.4785509633502
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1743760557868'
+          - output
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: o3-mini
+          provider: openai
+        prompt_template:
+        - id: d4952c9b-5f87-41ae-a4fb-7d7b3ec525d9
+          role: system
+          text: '# 依頼
+
+
+            ハルシネーションのリスクがあり、間違ってダミーな引用リンクが含まれているなどの可能性があります。これを踏まえて、正しく結果を返すようにしてください。
+
+
+            元の依頼と、参考情報を再度提供します。
+
+
+            '
+        - id: 33e5de95-4dae-4c82-b0f4-448c4c39204a
+          role: user
+          text: '# 元の依頼
+
+
+            <request>
+
+            {{#context#}}
+
+            </request>
+
+
+            # 企業や採用に関する情報
+
+
+            {{#1743745505461.output#}}'
+        selected: false
+        title: Final Output
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '17437605360250'
+      position:
+        x: 2594.7712517900923
+        y: 1385.1949786550294
+      positionAbsolute:
+        x: 2594.7712517900923
+        y: 1385.1949786550294
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        selected: true
+        template: 'あなたは優秀なリサーチャーです。
+
+          以下の企業について、信頼できる最新情報を収集し、要点を整理してください。
+
+
+          ### **調査対象企業:** {{ company_name }}
+
+
+          ### 制約条件
+
+
+          -情報ソースとして、公式ウェブサイト、IR資料、求人サイト、ニュース記事、SNS（企業の公式アカウント）などを活用してください。
+
+          -できるだけ最新の情報を取得してください。
+
+          -各回答の引用元をURL含めてMarkdownでリンク化し、必ず飛べる形で明記してください。参考にしたリンクも示すこと。なお、各ドメインリンクはトップページにしか遷移しないので、必ずvertexaisearch.cloud.google.com
+          のドメインから抽出うすること。引用リンクが正しいものになります。例：[text](url)形式で書くこと。必ずURLは最後まで出力してください。https://vertexaisearch.cloud.google.com/grounding-api-redirect/xxxx
+          の最後まで抽出すること。
+
+
+          # 出力フォーマット
+
+
+          ## **企業情報**
+
+
+          1. **所在地:** 企業の本社所在地
+
+          2. **業種:** 主要な業界分類
+
+          3. **従業員数:** 最新の公式情報（正社員・契約社員・派遣を含む場合は内訳も）
+
+          4. **業務内容:** 主な製品・サービス、事業内容の概要
+
+          5. **ビジネスモデル:** 収益の仕組み、BtoB/BtoC/BtoGなどの分類
+
+          6. **親会社:** 親会社が存在する場合、その企業名
+
+          7. **事業上の競合:** 主要な競合企業
+
+          8. **競合と比較した際の強み・弱み:** 競争優位性と課題点
+
+
+          ## **採用情報**
+
+
+          1. **採用人数:** 新卒の採用人数
+
+          2. **募集職種:** 新卒採用における募集中の職種
+
+          3. **求める人物像:** 企業が採用において重視するスキル・資質
+
+          3. **選考プロセス:** 企業が
+
+          4. **社員インタビュー記事:** 公式サイト・採用ページ・ニュース記事からの社員インタビュー情報
+
+          5. **エントリーする学生のペルソナ:** 実際に応募している学生の特徴（学歴・専攻・志向性）
+
+
+          '
+        title: Summarize Prompt
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1731653639411'
+          - company_name
+          variable: company_name
+      height: 54
+      id: '1743760557868'
+      position:
+        x: 2286.7372277507193
+        y: 1154.4785509633502
+      positionAbsolute:
+        x: 2286.7372277507193
+        y: 1154.4785509633502
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1743745505461'
+        provider_id: 1e65b50f-34f7-44f8-bdfe-98a6269ed0e3
+        provider_name: Google Grounding Search API
+        provider_type: api
+        selected: false
+        title: processGeminiGroundingGoogle
+        tool_configurations: {}
+        tool_label: processGeminiGroundingGoogle
+        tool_name: processGeminiGroundingGoogle
+        tool_parameters:
+          prompt:
+            type: mixed
+            value: '{{#1743745505461.item#}}'
+        type: tool
+      height: 54
+      id: '1745489794761'
+      parentId: '1743745505461'
+      position:
+        x: 432
+        y: 68
+      positionAbsolute:
+        x: 1857.626962825754
+        y: 1208.3028076494197
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    viewport:
+      x: -1225.058839262044
+      y: -563.9752378787193
+      zoom: 0.6285944397978884
